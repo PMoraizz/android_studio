@@ -22,23 +22,34 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main2);
-    }
-
-    public void onClick(View view) {
         edtGasolina = findViewById(R.id.edtGasolina);
         edtAlcool = findViewById(R.id.edtAlcool);
         imgResp = findViewById(R.id.img2);
 
+        edtGasolina.addTextChangedListener(new Mascara(edtGasolina));
+        edtAlcool.addTextChangedListener(new Mascara(edtAlcool));
+
+    }
+
+    public void onClick(View view) {
         double gasolina, alcool, op;
-        gasolina = Double.parseDouble(edtGasolina.getText().toString());
-        alcool = Double.parseDouble(edtAlcool.getText().toString());
+        try {
+            gasolina = Double.parseDouble(edtGasolina.getText().toString().replaceAll("[^\\d]", ""));
+            alcool = Double.parseDouble(edtAlcool.getText().toString().replaceAll("[^\\d]", ""));
 
-        op = alcool/gasolina;
+            op = gasolina/alcool;
 
-        if(op >= 0.7){
-            imgResp.setImageResource(R.drawable.alcool);
-        } else {
-            imgResp.setImageResource(R.drawable.gasolina);
+            if(alcool == 0.0 || gasolina == 0.0){
+                imgResp.setImageResource(R.drawable.ic_launcher_foreground);
+            } else {
+                if(op >= 0.7){
+                    imgResp.setImageResource(R.drawable.alcool);
+                } else {
+                    imgResp.setImageResource(R.drawable.gasolina);
+                }
+            }
+        } catch (Exception e){
+
         }
     }
 }
