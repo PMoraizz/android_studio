@@ -48,6 +48,7 @@ public class Mascara implements TextWatcher {
             ed.setSelection(formatted.length() - (tipoCampo == TipoCampo.PESO ? 3 : 2)); // Ajusta o cursor
 
             ed.addTextChangedListener(this);
+
         }
     }
 
