@@ -6,3 +6,7 @@
 ### 1. Codigos Aula 23/10/2024
 **Descrição:** detalhes dos codigos das aulas 
 - app Alcool ou Gasolina
+
+### 2. Codigos Aula 29/10/2024
+**Descição:**  detalhes dos codigos das aulas
+-  app IMC
