@@ -13,29 +13,32 @@ public class Mascara implements TextWatcher {
 
     // Enumeração para definir o tipo de campo (Peso ou Altura)
     public enum TipoCampo {
-        PESO,
-        ALTURA
+        PESO, // Representa o campo de peso
+        ALTURA // Representa o campo de altura
     }
 
     // Construtor que recebe o EditText e o tipo de campo
     public Mascara(EditText editText, TipoCampo tipoCampo) {
-        this.ed = editText;
-        this.tipoCampo = tipoCampo;
+        this.ed = editText; // Inicializa o EditText
+        this.tipoCampo = tipoCampo; // Define o tipo de campo
     }
 
     @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        // Método não utilizado, mas necessário para a interface TextWatcher
+    }
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         // Verifica se o texto não está vazio
         if (!charSequence.toString().isEmpty()) {
-            ed.removeTextChangedListener(this);
+            ed.removeTextChangedListener(this); // Remove o listener para evitar loops
 
+            // Remove caracteres não numéricos e converte para double
             String clean = charSequence.toString().replaceAll("[^\\d]", "");
             double parsed = Double.parseDouble(clean);
 
-            String formatted;
+            String formatted; // Variável para armazenar o texto formatado
             if (tipoCampo == TipoCampo.PESO) {
                 // Formata para peso (ex: 70.50 kg)
                 formatted = new DecimalFormat("#,##0.00").format(parsed / 100) + " kg";
@@ -44,15 +47,16 @@ public class Mascara implements TextWatcher {
                 formatted = new DecimalFormat("#0.00").format(parsed / 100) + " m";
             }
 
-            ed.setText(formatted);
-            ed.setSelection(formatted.length() - (tipoCampo == TipoCampo.PESO ? 3 : 2)); // Ajusta o cursor
+            ed.setText(formatted); // Define o texto formatado no EditText
+            // Ajusta o cursor para o final do texto formatado
+            ed.setSelection(formatted.length() - (tipoCampo == TipoCampo.PESO ? 3 : 2));
 
-            ed.addTextChangedListener(this);
-
+            ed.addTextChangedListener(this); // Readição do listener
         }
     }
 
     @Override
-    public void afterTextChanged(Editable editable) {}
+    public void afterTextChanged(Editable editable) {
+        // Método não utilizado, mas necessário para a interface TextWatcher
+    }
 }
-
