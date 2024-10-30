@@ -7,6 +7,7 @@ import android.widget.EditText;
 import java.text.DecimalFormat;
 
 public class Mascara implements TextWatcher {
+
     // Declaração da variável para o EditText a ser formatado
     private final EditText ed;
     private final TipoCampo tipoCampo;
@@ -38,7 +39,9 @@ public class Mascara implements TextWatcher {
             String clean = charSequence.toString().replaceAll("[^\\d]", "");
             double parsed = Double.parseDouble(clean);
 
-            String formatted; // Variável para armazenar o texto formatado
+            // Variável para armazenar o texto formatado
+            String formatted;
+
             if (tipoCampo == TipoCampo.PESO) {
                 // Formata para peso (ex: 70.50 kg)
                 formatted = new DecimalFormat("#,##0.00").format(parsed / 100) + " kg";
@@ -47,11 +50,14 @@ public class Mascara implements TextWatcher {
                 formatted = new DecimalFormat("#0.00").format(parsed / 100) + " m";
             }
 
-            ed.setText(formatted); // Define o texto formatado no EditText
+            // Define o texto formatado no EditText
+            ed.setText(formatted);
+
             // Ajusta o cursor para o final do texto formatado
             ed.setSelection(formatted.length() - (tipoCampo == TipoCampo.PESO ? 3 : 2));
 
-            ed.addTextChangedListener(this); // Readição do listener
+            // Readição do listener
+            ed.addTextChangedListener(this);
         }
     }
 
