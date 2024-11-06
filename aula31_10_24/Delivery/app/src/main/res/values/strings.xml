@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Delivery</string>
+    <string name="delivery">Delivery</string>
+    <string name="insira_seu_nome">Insira seu nome</string>
+    <string name="price_15_0">Price: $15.0</string>
+    <string name="menos">-</string>
+    <string name="zero">0</string>
+    <string name="mais">+</string>
+    <string name="order">Order</string>
+</resources>
