@@ -253,7 +253,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnFuncaoCalc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -261,8 +261,7 @@
             android:background="@drawable/ic_background_button_preto"
             android:contentDescription="@string/funcaoCalc"
             android:gravity="center"
-            android:text="@string/funcaoCalc"
-            android:textColor="@color/white"
+            android:src="@drawable/calculator"
             android:textSize="24sp"
             android:textStyle="bold" />
 
