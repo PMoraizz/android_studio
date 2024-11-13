@@ -1,5 +1,6 @@
 package com.example.calculadora;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,8 +11,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView historicoTextView;
     private TextView contaTextView;
-    private double valorAtual = 0;
-    private double resultado = 0;
+    private float valorAtual = 0;
+    private float resultado = 0;
     private String operadorAtual = "";
     private boolean novoOperador = true;
 
@@ -33,17 +34,6 @@ public class MainActivity extends AppCompatActivity {
         for (Button btn : numButtons) {
             btn.setOnClickListener(this::onNumberClick);
         }
-
-        // Configuração de cada botão de operação
-        findViewById(R.id.btnAdicao).setOnClickListener(v -> onOperatorClick("+"));
-        findViewById(R.id.btnSubitracao).setOnClickListener(v -> onOperatorClick("-"));
-        findViewById(R.id.btnMultiplicacao).setOnClickListener(v -> onOperatorClick("*"));
-        findViewById(R.id.btnDivisao).setOnClickListener(v -> onOperatorClick("/"));
-        findViewById(R.id.btnIgual).setOnClickListener(v -> onEqualClick());
-        findViewById(R.id.btnAC).setOnClickListener(v -> onClearClick());
-        findViewById(R.id.btnDecimal).setOnClickListener(v -> onDecimalClick());
-        findViewById(R.id.btnInverterSinal).setOnClickListener(v -> onToggleSignClick());
-        findViewById(R.id.btnPorcentagem).setOnClickListener(v -> onPercentageClick());
     }
 
     private void onNumberClick(View v) {
@@ -56,15 +46,46 @@ public class MainActivity extends AppCompatActivity {
         contaTextView.append(numero);
     }
 
+    @SuppressLint("SetTextI18n")
     private void onOperatorClick(String operador) {
-        valorAtual = Double.parseDouble(contaTextView.getText().toString());
+        valorAtual = Float.parseFloat(contaTextView.getText().toString());
         operadorAtual = operador;
         historicoTextView.setText(valorAtual + " " + operadorAtual);
         novoOperador = true;
     }
 
-    private void onEqualClick() {
-        double valorDigitado = Double.parseDouble(contaTextView.getText().toString());
+    public void onClearClick(View view) {
+        valorAtual = 0;
+        resultado = 0;
+        operadorAtual = "";
+        contaTextView.setText("0");
+        historicoTextView.setText("");
+        novoOperador = true;
+    }
+
+    public void onToggleSignClick(View view) {
+        float valor = Float.parseFloat(contaTextView.getText().toString());
+        valor = -valor;
+        contaTextView.setText(String.valueOf(valor));
+    }
+
+    public void onPercentageClick(View view) {
+        float valor = Float.parseFloat(contaTextView.getText().toString());
+        valor = valor / 100;
+        contaTextView.setText(String.valueOf(valor));
+    }
+
+    public void onDevideClick(View view){ onOperatorClick("/"); }
+
+    public void onMultiplyClick(View view) { onOperatorClick("*"); }
+
+    public void onSubtractClick(View view){ onOperatorClick("-"); }
+
+    public void onAddClick(View view){ onOperatorClick("+"); }
+
+    @SuppressLint("SetTextI18n")
+    public void onEqualClick(View view) {
+        float valorDigitado = Float.parseFloat(contaTextView.getText().toString());
         switch (operadorAtual) {
             case "+":
                 resultado = valorAtual + valorDigitado;
@@ -87,35 +108,16 @@ public class MainActivity extends AppCompatActivity {
                 resultado = valorDigitado;
                 break;
         }
-        historicoTextView.setText(historicoTextView.getText().toString() + " " + valorDigitado + " =");
+        historicoTextView.setText(historicoTextView.getText().toString() + " " + valorDigitado);
         contaTextView.setText(String.valueOf(resultado));
         novoOperador = true;
     }
 
-    private void onClearClick() {
-        valorAtual = 0;
-        resultado = 0;
-        operadorAtual = "";
-        contaTextView.setText("");
-        historicoTextView.setText("");
-        novoOperador = true;
-    }
-
-    private void onDecimalClick() {
+    public void onDecimalClick(View view) {
         if (!contaTextView.getText().toString().contains(".")) {
             contaTextView.append(".");
         }
     }
 
-    private void onToggleSignClick() {
-        double valorAtualDisplay = Double.parseDouble(contaTextView.getText().toString());
-        valorAtualDisplay = -valorAtualDisplay;
-        contaTextView.setText(String.valueOf(valorAtualDisplay));
-    }
 
-    private void onPercentageClick() {
-        double valorAtualDisplay = Double.parseDouble(contaTextView.getText().toString());
-        valorAtualDisplay = valorAtualDisplay / 100;
-        contaTextView.setText(String.valueOf(valorAtualDisplay));
-    }
 }
