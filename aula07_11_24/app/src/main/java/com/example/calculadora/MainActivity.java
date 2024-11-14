@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         contaTextView = findViewById(R.id.conta);
 
         // Configuração dos botões numéricos de 0 a 9
-        Button[] numButtons = new Button[] {
+        Button[] numButtons = new Button[]{
                 findViewById(R.id.btn0), findViewById(R.id.btn1), findViewById(R.id.btn2),
                 findViewById(R.id.btn3), findViewById(R.id.btn4), findViewById(R.id.btn5),
                 findViewById(R.id.btn6), findViewById(R.id.btn7), findViewById(R.id.btn8), findViewById(R.id.btn9)
@@ -97,10 +98,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Métodos para os operadores de divisão, multiplicação, subtração e adição
-    public void onDevideClick(View view){ onOperatorClick("/"); }
-    public void onMultiplyClick(View view) { onOperatorClick("*"); }
-    public void onSubtractClick(View view){ onOperatorClick("-"); }
-    public void onAddClick(View view){ onOperatorClick("+"); }
+    public void onDevideClick(View view) {
+        onOperatorClick("/");
+    }
+
+    public void onMultiplyClick(View view) {
+        onOperatorClick("*");
+    }
+
+    public void onSubtractClick(View view) {
+        onOperatorClick("-");
+    }
+
+    public void onAddClick(View view) {
+        onOperatorClick("+");
+    }
 
     // Método para calcular o resultado quando o botão de igual (=) é pressionado
     @SuppressLint("SetTextI18n")
