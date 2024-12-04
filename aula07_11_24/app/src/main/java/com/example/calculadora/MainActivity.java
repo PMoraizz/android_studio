@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.projeto_calculadora.R;
+
 public class MainActivity extends AppCompatActivity {
 
     // Declaração das variáveis para armazenar os TextViews e os valores da operação
