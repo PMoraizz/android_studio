@@ -1,19 +1,17 @@
 package com.example.aula03_12_24;
 
-import android.widget.ImageView;
-
-public class RocketModal {
+public class RocketModel {
     int rocketImage;
     String rocketName;
-    String lauchDate;
-    boolean lauchSuccess;
+    String launchDate;
+    boolean launchSuccess;
     String payload;
 
-    public RocketModal (int rocketImage, String rocketName, String lauchDate, boolean lauchSuccess, String payload){
+    public RocketModel(int rocketImage, String rocketName, String launchDate, boolean launchSuccess, String payload){
         this.rocketImage = rocketImage;
         this.rocketName = rocketName;
-        this.lauchDate = lauchDate;
-        this.lauchSuccess = lauchSuccess;
+        this.launchDate = launchDate;
+        this.launchSuccess = launchSuccess;
         this.payload = payload;
     }
 
@@ -33,20 +31,20 @@ public class RocketModal {
         this.rocketName = rocketName;
     }
 
-    public String getLauchDate(){
-        return lauchDate;
+    public String getLaunchDate(){
+        return launchDate;
     }
 
-    public void setLauchDate(String lauchDate){
-        this.lauchDate = lauchDate;
+    public void setLaunchDate(String launchDate){
+        this.launchDate = launchDate;
     }
 
-    public boolean isLauchSuccess(){
-        return lauchSuccess;
+    public boolean isLaunchSuccess(){
+        return launchSuccess;
     }
 
-    public void setLauchSuccess(boolean lauchSuccess){
-        this.lauchSuccess = lauchSuccess;
+    public void setLaunchSuccess(boolean launchSuccess){
+        this.launchSuccess = launchSuccess;
     }
 
     public String getPayload(){

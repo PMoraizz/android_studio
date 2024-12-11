@@ -1,5 +1,6 @@
 package com.example.aula03_12_24;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +13,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class RocketAdapter extends RecyclerView.Adapter<RocketAdapter.ViewHolder> {
-    ArrayList<RocketModal> rocketModals;
+    ArrayList<RocketModel> rocketModals;
 
-    public RocketAdapter(ArrayList<RocketModal> rocketModals){
+    // Comentar
+    public RocketAdapter(ArrayList<RocketModel> rocketModals) {
         this.rocketModals = rocketModals;
     }
 
-    public static class  ViewHolder extends  RecyclerView.ViewHolder {
+    // Comentar
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView rocket_image;
         TextView rocket_name;
         TextView launch_date;
         TextView launch_success;
         TextView payload;
 
-        public ViewHolder(@NonNull View itemView){
+        // Comentar
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             rocket_image = itemView.findViewById(R.id.rocket_image);
@@ -43,21 +47,26 @@ public class RocketAdapter extends RecyclerView.Adapter<RocketAdapter.ViewHolder
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RocketAdapter.ViewHolder holder, int position) {
-        RocketModal rocketModal = rocketModals.get(position);
 
+        // Comentar
+        RocketModel rocketModal = rocketModals.get(position);
+
+        // Comentar
         holder.rocket_image.setImageResource(rocketModal.getRocketImage());
+        holder.rocket_name.setText("Rocket: " + rocketModal.getRocketName());
+        holder.launch_date.setText("Launch Date: " + rocketModal.getLaunchDate());
 
-        holder.rocket_name.setText("Rocket: " +rocketModal.getRocketName());
-        holder.launch_date.setText("Launch Date: " + rocketModal.getLauchDate());
-
-        if(rocketModal.isLauchSuccess()){
-            holder.launch_success.setText("Launch Succeded");
+        // Comentar
+        if (rocketModal.isLaunchSuccess()) {
+            holder.launch_success.setText("Launch Succeeded");
         } else {
             holder.launch_success.setText("Launch Failed");
         }
 
+        // Comentar
         holder.payload.setText("Payload: " + rocketModal.getPayload());
     }
 
