@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <ImageView
+        android:id="@+id/pizza_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/pizza_3_queijos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pizza_name"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/pizza_image"
+        android:text="Nome: "
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/pizza_image"
+        app:layout_constraintTop_toTopOf="@+id/pizza_image" />
+
+    <TextView
+        android:id="@+id/pizza_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="30dp"
+        android:text="R$ 45.00"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/pizza_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pizza_name" />
+
+    <TextView
+        android:id="@+id/pizza_ingredients"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pizza_name"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/pizza_image"
+        android:text="ingredientes: "
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/pizza_image"
+        app:layout_constraintStart_toEndOf="@+id/pizza_image"
+        app:layout_constraintTop_toBottomOf="@+id/pizza_name" />
+
+    <Button
+        android:id="@+id/btnMenos"
+        android:layout_width="30dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="30dp"
+        android:backgroundTint="#F44336"
+        android:drawablePadding="0dp"
+        android:includeFontPadding="false"
+        android:padding="0dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        android:text="-"
+        android:textSize="10sp"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pizza_ingredients"
+        app:layout_constraintStart_toEndOf="@+id/pizza_ingredients"
+        app:layout_constraintTop_toTopOf="@+id/pizza_ingredients" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMenos"
+        app:layout_constraintStart_toEndOf="@+id/btnMenos"
+        app:layout_constraintTop_toTopOf="@+id/btnMenos" />
+
+    <Button
+        android:id="@+id/btnMais"
+        android:layout_width="30dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="#F44336"
+        android:padding="0dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        android:text="+"
+        android:textSize="10sp"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
