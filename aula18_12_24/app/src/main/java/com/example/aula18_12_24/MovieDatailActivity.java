@@ -16,18 +16,18 @@ public class MovieDatailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
-        titleTextView = findViewById(R.id.txtNomeFilme);
-        posterImageView = findViewById(R.id.imgFilme);
-        descricaoTextView = findViewById(R.id.txtDescricao);
-        pontuacoTextView = findViewById(R.id.txtPontuacao);
-        categoriaImageView = findViewById(R.id.imgCategoria);
+        titleTextView =         findViewById(R.id.txtNomeFilme);
+        posterImageView =       findViewById(R.id.imgFilme);
+        descricaoTextView =     findViewById(R.id.txtDescricao);
+        pontuacoTextView =      findViewById(R.id.txtPontuacao);
+        categoriaImageView =    findViewById(R.id.imgCategoria);
 
         Intent intent = getIntent();
-        String movieTitle = intent.getStringExtra("movieTitle");
+        String movieTitle =     intent.getStringExtra("movieTitle");
         String descricaoMovie = intent.getStringExtra("descricao");
         double pontuacaoMovie = intent.getDoubleExtra("pontuacao", -1.0);
-        int movieImage = intent.getIntExtra("moviePosterImage", -1);
-        int categoriaImage = intent.getIntExtra("categoriaImage", -1);
+        int movieImage =        intent.getIntExtra("moviePosterImage", -1);
+        int categoriaImage =    intent.getIntExtra("categoriaImage", -1);
 
         if(movieTitle != null && descricaoMovie != null && pontuacaoMovie != -1.0 && movieImage != -1 && categoriaImage != -1){
             titleTextView.setText(movieTitle);
