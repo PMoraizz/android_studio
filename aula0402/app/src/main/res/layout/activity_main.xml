@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/principal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2C2D33"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/campoUsuario"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#80FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/campoSenha"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#80FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/campoUsuario"
+        app:layout_constraintStart_toStartOf="@+id/campoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/campoUsuario" />
+
+    <Button
+        android:id="@+id/botaoLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2D7A30"
+        android:text="Entrar"
+        app:layout_constraintEnd_toEndOf="@+id/campoSenha"
+        app:layout_constraintStart_toStartOf="@+id/campoSenha"
+        app:layout_constraintTop_toBottomOf="@+id/campoSenha" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Não tem cadastro ainda? "
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/botaoLogin"
+        app:layout_constraintEnd_toStartOf="@+id/linkCadastro"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botaoLogin" />
+
+    <TextView
+        android:id="@+id/linkCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="Clique aqui para registrar"
+        android:textColor="#3F51B5"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <ImageView
+        android:id="@+id/imagemLogin"
+        android:layout_width="410dp"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_login" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tela de Login"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagemLogin" />
+
+    <ImageView
+        android:id="@+id/imagemUsuario"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toBottomOf="@+id/campoUsuario"
+        app:layout_constraintEnd_toStartOf="@+id/campoUsuario"
+        app:layout_constraintTop_toTopOf="@+id/campoUsuario"
+        app:srcCompat="@drawable/round_account_circle_24" />
+
+    <ImageView
+        android:id="@+id/imagemSenha"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toBottomOf="@+id/campoSenha"
+        app:layout_constraintEnd_toStartOf="@+id/campoSenha"
+        app:layout_constraintTop_toTopOf="@+id/campoSenha"
+        app:srcCompat="@drawable/baseline_lock_24" />
+</androidx.constraintlayout.widget.ConstraintLayout>
