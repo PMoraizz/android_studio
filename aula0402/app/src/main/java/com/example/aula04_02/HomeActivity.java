@@ -8,7 +8,11 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class HomeActivity extends AppCompatActivity {
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +28,15 @@ public class HomeActivity extends AppCompatActivity {
         // "dadosUsuario" é o nome do arquivo de preferências
         SharedPreferences preferencias = getSharedPreferences("dadosUsuario", MODE_PRIVATE);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        String emailUsuario = user.getEmail().toString();
+
         // Obtém os dados de usuário armazenados no SharedPreferences ou retorna um valor padrão
         String nomeUsuario = preferencias.getString("nome", "Nome não encontrado");
-        String emailUsuario = preferencias.getString("email", "Email não encontrado");
+//        String emailUsuario = preferencias.getString("email", "Email não encontrado");
         String cpfUsuario = preferencias.getString("cpf", "CPF não encontrado");
         String dataNascimento = preferencias.getString("dataNascimento", "Data de nascimento não encontrada");
         String generoUsuario = preferencias.getString("genero", "Gênero não informado");

@@ -3,6 +3,7 @@ package com.example.aula04_02;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,13 +11,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
     // Declaração dos componentes da interface
     TextView linkCadastro;
     Button botaoLogin;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         // Vincula os componentes da interface (link de cadastro e botão de login)
         linkCadastro = findViewById(R.id.linkCadastro);
         botaoLogin = findViewById(R.id.botaoLogin);
+
+        mAuth = FirebaseAuth.getInstance();
 
         // Configura o link para a tela de cadastro
         configurarLinkCadastro();
@@ -64,27 +76,37 @@ public class MainActivity extends AppCompatActivity {
                 String usuarioDigitado = campoUsuario.getText().toString();
                 String senhaDigitada = campoSenha.getText().toString();
 
-                // Recupera as credenciais salvas no SharedPreferences
-                SharedPreferences preferencias = getSharedPreferences("dadosUsuario", MODE_PRIVATE);
-                String usuarioSalvo = preferencias.getString("email", "");
-                String senhaSalva = preferencias.getString("senha", "");
-                String nomeCompleto = preferencias.getString("nome", "Usuário");
-
                 // Verifica se as credenciais digitadas correspondem às salvas no SharedPreferences
-                if (usuarioDigitado.equals(usuarioSalvo) && senhaDigitada.equals(senhaSalva)) {
-                    // Se a autenticação for bem-sucedida, exibe uma mensagem de sucesso
-                    Toast.makeText(MainActivity.this, "Autenticação bem-sucedida!", Toast.LENGTH_LONG).show();
+                if (!usuarioDigitado.isEmpty() && !senhaDigitada.isEmpty()) {
+                    mAuth.signInWithEmailAndPassword(usuarioDigitado, senhaDigitada).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
 
-                    // Cria uma nova Intent para redirecionar o usuário para a HomeActivity
-                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                    intent.putExtra("nome", nomeCompleto); // Passa o nome do usuário para a HomeActivity
-                    startActivity(intent);
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                if (user.isEmailVerified()) {
+                                    // Se a autenticação for bem-sucedida, exibe uma mensagem de sucesso
+                                    Toast.makeText(MainActivity.this, "Autenticação bem-sucedida!", Toast.LENGTH_LONG).show();
 
-                    // Finaliza a tela de login, impedindo que o usuário retorne a ela
-                    finish();
+                                    // Cria uma nova Intent para redirecionar o usuário para a HomeActivity
+                                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+
+                                    // Finaliza a tela de login, impedindo que o usuário retorne a ela
+                                    finish();
+                                } else {
+                                    Toast.makeText(MainActivity.this, "Email nao verificado", Toast.LENGTH_LONG).show();
+                                }
+
+                            } else {
+                                Log.v("Sign in Failed ", task.getException().toString());
+                                Toast.makeText(MainActivity.this, "Email e ou senha incorreto.", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
                 } else {
                     // Caso as credenciais não correspondam, exibe uma mensagem de erro
-                    Toast.makeText(MainActivity.this, "Email e ou senha incorreto.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
                 }
             }
         });

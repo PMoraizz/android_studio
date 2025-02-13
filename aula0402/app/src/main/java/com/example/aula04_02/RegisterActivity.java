@@ -3,18 +3,28 @@ package com.example.aula04_02;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
     // Declaração do botão de registrar
     Button botaoRegistrar;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Vincula o botão de registrar com o botão da interface
         botaoRegistrar = findViewById(R.id.botaoRegistrar);
+
+        mAuth = FirebaseAuth.getInstance();
 
         // Chama o método para registrar o usuário
         registrarUsuario();
@@ -67,13 +79,16 @@ public class RegisterActivity extends AppCompatActivity {
                         !cpf.isEmpty() && !dataNascimento.isEmpty() && !genero.isEmpty() &&
                         !telefone.isEmpty() && !endereco.isEmpty()) {
 
+                    mAuth.createUserWithEmailAndPassword(emailUsuario, senha);
+
+
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    user.sendEmailVerification();
+
                     // Salvando os dados no SharedPreferences para persistência
                     SharedPreferences preferencias = getSharedPreferences("dadosUsuario", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferencias.edit();
 
-                    // Salvando cada campo de dado no SharedPreferences
-                    editor.putString("email", emailUsuario);
-                    editor.putString("senha", senha);
                     editor.putString("nome", nomeCompleto);
                     editor.putString("cpf", cpf);
                     editor.putString("dataNascimento", dataNascimento);
@@ -93,6 +108,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                     // Finaliza a activity de registro para evitar que o usuário retorne a ela após o login
                     finish();
+
+
                 } else {
                     // Exibindo uma mensagem de erro caso algum campo não tenha sido preenchido
                     Toast.makeText(RegisterActivity.this, "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
