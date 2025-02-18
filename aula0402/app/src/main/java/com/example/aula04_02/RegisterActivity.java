@@ -79,37 +79,46 @@ public class RegisterActivity extends AppCompatActivity {
                         !cpf.isEmpty() && !dataNascimento.isEmpty() && !genero.isEmpty() &&
                         !telefone.isEmpty() && !endereco.isEmpty()) {
 
-                    mAuth.createUserWithEmailAndPassword(emailUsuario, senha);
+                    if (senha.length() >= 6) {
+                        mAuth.createUserWithEmailAndPassword(emailUsuario, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    user.sendEmailVerification();
 
+                                    // Salvando os dados no SharedPreferences para persistência
+                                    SharedPreferences preferencias = getSharedPreferences("dadosUsuario", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = preferencias.edit();
 
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    user.sendEmailVerification();
+                                    editor.putString("nome", nomeCompleto);
+                                    editor.putString("cpf", cpf);
+                                    editor.putString("dataNascimento", dataNascimento);
+                                    editor.putString("genero", genero);
+                                    editor.putString("telefone", telefone);
+                                    editor.putString("endereco", endereco);
 
-                    // Salvando os dados no SharedPreferences para persistência
-                    SharedPreferences preferencias = getSharedPreferences("dadosUsuario", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferencias.edit();
+                                    // Aplica as mudanças no SharedPreferences
+                                    editor.apply();
 
-                    editor.putString("nome", nomeCompleto);
-                    editor.putString("cpf", cpf);
-                    editor.putString("dataNascimento", dataNascimento);
-                    editor.putString("genero", genero);
-                    editor.putString("telefone", telefone);
-                    editor.putString("endereco", endereco);
+                                    // Exibindo uma mensagem de sucesso
+                                    Toast.makeText(RegisterActivity.this, nomeCompleto + " registrado com sucesso!", Toast.LENGTH_LONG).show();
 
-                    // Aplica as mudanças no SharedPreferences
-                    editor.apply();
+                                    // Redirecionando o usuário para a tela de login (MainActivity)
+                                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                    startActivity(intent);
 
-                    // Exibindo uma mensagem de sucesso
-                    Toast.makeText(RegisterActivity.this, nomeCompleto + " registrado com sucesso!", Toast.LENGTH_LONG).show();
-
-                    // Redirecionando o usuário para a tela de login (MainActivity)
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                    startActivity(intent);
-
-                    // Finaliza a activity de registro para evitar que o usuário retorne a ela após o login
-                    finish();
-
-
+                                    // Finaliza a activity de registro para evitar que o usuário retorne a ela após o login
+                                    finish();
+                                } else {
+                                    Toast.makeText(RegisterActivity.this, task.getException().toString(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        Toast.makeText(RegisterActivity.this, "Senha precisa conter pelo menos 6 caracteres", Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     // Exibindo uma mensagem de erro caso algum campo não tenha sido preenchido
                     Toast.makeText(RegisterActivity.this, "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
