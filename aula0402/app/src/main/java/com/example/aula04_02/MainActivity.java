@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     TextView linkCadastro;
     Button botaoLogin;
     private FirebaseAuth mAuth;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference realtimeDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +81,11 @@ public class MainActivity extends AppCompatActivity {
                     mAuth.signInWithEmailAndPassword(usuarioDigitado, senhaDigitada).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+
                             if (task.isSuccessful()) {
 
                                 FirebaseUser user = mAuth.getCurrentUser();
+
                                 if (user.isEmailVerified()) {
                                     // Se a autenticação for bem-sucedida, exibe uma mensagem de sucesso
                                     Toast.makeText(MainActivity.this, "Autenticação bem-sucedida!", Toast.LENGTH_LONG).show();
@@ -91,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                                     // Finaliza a tela de login, impedindo que o usuário retorne a ela
                                     finish();
                                 } else {
-                                    Toast.makeText(MainActivity.this, "Email nao verificado", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(MainActivity.this, "Por favor, verifique seu email antes de logar.", Toast.LENGTH_LONG).show();
                                 }
 
                             } else {

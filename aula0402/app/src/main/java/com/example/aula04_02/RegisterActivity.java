@@ -1,9 +1,7 @@
 package com.example.aula04_02;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,11 +18,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
     // Declaração do botão de registrar
     Button botaoRegistrar;
     private FirebaseAuth mAuth;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference realtimeDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
         botaoRegistrar = findViewById(R.id.botaoRegistrar);
 
         mAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        realtimeDB = firebaseDatabase.getReference();
 
         // Chama o método para registrar o usuário
         registrarUsuario();
@@ -83,40 +87,43 @@ public class RegisterActivity extends AppCompatActivity {
                         mAuth.createUserWithEmailAndPassword(emailUsuario, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+
                                 if (task.isSuccessful()) {
+
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    user.sendEmailVerification();
 
-                                    // Salvando os dados no SharedPreferences para persistência
-                                    SharedPreferences preferencias = getSharedPreferences("dadosUsuario", MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = preferencias.edit();
+                                    if (user != null)
+                                        user.sendEmailVerification();
 
-                                    editor.putString("nome", nomeCompleto);
-                                    editor.putString("cpf", cpf);
-                                    editor.putString("dataNascimento", dataNascimento);
-                                    editor.putString("genero", genero);
-                                    editor.putString("telefone", telefone);
-                                    editor.putString("endereco", endereco);
+                                    String user_id = mAuth.getCurrentUser().getUid();
+                                    DatabaseReference usersRef = realtimeDB.child("user").child(user_id);
 
-                                    // Aplica as mudanças no SharedPreferences
-                                    editor.apply();
+                                    User usr = new User(emailUsuario, nomeCompleto, cpf, dataNascimento, genero, telefone, endereco);
 
-                                    // Exibindo uma mensagem de sucesso
-                                    Toast.makeText(RegisterActivity.this, nomeCompleto + " registrado com sucesso!", Toast.LENGTH_LONG).show();
+                                    usersRef.setValue(usr).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                // Exibindo uma mensagem de sucesso
+                                                Toast.makeText(RegisterActivity.this, "Por favor, verifique seu email para finalizar o cadastro.", Toast.LENGTH_LONG).show();
 
-                                    // Redirecionando o usuário para a tela de login (MainActivity)
-                                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                    startActivity(intent);
+                                                // Redirecionando o usuário para a tela de login (MainActivity)
+                                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                                startActivity(intent);
 
-                                    // Finaliza a activity de registro para evitar que o usuário retorne a ela após o login
-                                    finish();
+                                                // Finaliza a activity de registro para evitar que o usuário retorne a ela após o login
+                                                finish();
+                                            } else {
+                                                Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
                                 } else {
                                     Toast.makeText(RegisterActivity.this, task.getException().toString(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
-                    }
-                    else {
+                    } else {
                         Toast.makeText(RegisterActivity.this, "Senha precisa conter pelo menos 6 caracteres", Toast.LENGTH_LONG).show();
                     }
                 } else {
