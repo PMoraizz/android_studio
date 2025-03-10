@@ -75,8 +75,8 @@
 
     <ImageView
         android:id="@+id/imagemLogin"
-        android:layout_width="410dp"
-        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

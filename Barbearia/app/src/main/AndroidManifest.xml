@@ -13,6 +13,18 @@
         android:theme="@style/Theme.Barbearia"
         tools:targetApi="31">
         <activity
+            android:name=".BarbeariaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ItensDatailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CatalogoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
