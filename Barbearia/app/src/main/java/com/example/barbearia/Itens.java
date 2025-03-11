@@ -4,7 +4,7 @@ public class Itens {
     private String titulo, descricao, preco, tempo;
     private int img;
 
-    public Itens(String titulo, String descricao, String preco, String tempo, int img){
+    public Itens(String titulo, String descricao, String preco, String tempo, int img) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.preco = preco;

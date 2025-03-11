@@ -2,6 +2,8 @@ package com.example.barbearia;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CatalogoActivity extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,5 +50,24 @@ public class CatalogoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+    public void onClickEstabelecimento(View v) {
+        Intent intent = new Intent(CatalogoActivity.this, BarbeariaActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void onClickProfissionais(View v) {
+        Intent intent = new Intent(CatalogoActivity.this, ProfissionaisActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void onClickPerfil(View v) {
+        Intent intent = new Intent(CatalogoActivity.this, PerfilActivity.class);
+        startActivity(intent);
+
     }
 }

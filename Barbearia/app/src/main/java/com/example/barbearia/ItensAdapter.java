@@ -17,7 +17,7 @@ public class ItensAdapter extends RecyclerView.Adapter<ItensAdapter.ItensViewHol
     private Context context;
     private OnItemClickListener onItemClickListener;
 
-    public ItensAdapter(Context context, List<Itens> itensList){
+    public ItensAdapter(Context context, List<Itens> itensList) {
         this.context = context;
         this.itensList = itensList;
     }
@@ -40,7 +40,7 @@ public class ItensAdapter extends RecyclerView.Adapter<ItensAdapter.ItensViewHol
         holder.img.setImageResource(item.getImg());
 
         holder.itemView.setOnClickListener(v -> {
-            if(onItemClickListener != null){
+            if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(item);
             }
         });
@@ -51,11 +51,11 @@ public class ItensAdapter extends RecyclerView.Adapter<ItensAdapter.ItensViewHol
         return itensList.size();
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public  interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(Itens itens);
     }
 

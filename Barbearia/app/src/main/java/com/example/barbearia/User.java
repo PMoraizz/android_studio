@@ -3,7 +3,7 @@ package com.example.barbearia;
 public class User {
     private String email, nome, cpf, nascimento, telefone;
 
-    public User(String Email, String Nome, String Cpf, String Nascimento, String Telefone){
+    public User(String Email, String Nome, String Cpf, String Nascimento, String Telefone) {
         setEmail(Email);
         setNome(Nome);
         setCpf(Cpf);

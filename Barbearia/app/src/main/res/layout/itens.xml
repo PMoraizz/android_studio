@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtDescricao" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgP1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -74,7 +74,7 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/txtPreco"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imgP1"
         app:layout_constraintTop_toTopOf="@+id/txtPreco" />
 
     <androidx.constraintlayout.widget.Guideline
