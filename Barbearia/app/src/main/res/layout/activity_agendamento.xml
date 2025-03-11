@@ -49,18 +49,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TimePicker
-                android:id="@+id/timePicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="#B3FFFFFF"
-                android:padding="24dp"
-                android:timePickerMode="spinner"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calendarView" />
-
             <TextView
                 android:id="@+id/txtNomeP"
                 android:layout_width="wrap_content"
@@ -85,7 +73,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/timePicker" />
+                app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
 
             <Button
                 android:id="@+id/btnAgendar"
@@ -115,6 +103,241 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtNomeP" />
+
+            <androidx.gridlayout.widget.GridLayout
+                android:id="@+id/gridLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:columnCount="4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/calendarView"
+                app:rowCount="5">
+
+                <Button
+                    android:id="@+id/btn8h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="08:00"
+                    android:textStyle="bold"
+                    app:layout_column="0"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/btn8_30h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="08:30"
+                    android:textStyle="bold"
+                    app:layout_column="1"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/btn9h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="09:00"
+                    android:textStyle="bold"
+                    app:layout_column="2"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/btn9_30h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="09:30"
+                    android:textStyle="bold"
+                    app:layout_column="3"
+                    app:layout_row="0" />
+
+                <Button
+                    android:id="@+id/btn10h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="10:00"
+                    android:textStyle="bold"
+                    app:layout_column="0"
+                    app:layout_row="1" />
+
+                <Button
+                    android:id="@+id/btn10_30h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="10:30"
+                    android:textStyle="bold"
+                    app:layout_column="1"
+                    app:layout_row="1" />
+
+                <Button
+                    android:id="@+id/btn11h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="11:00"
+                    android:textStyle="bold"
+                    app:layout_column="2"
+                    app:layout_row="1" />
+
+                <Button
+                    android:id="@+id/btn11_30h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="11:30"
+                    android:textStyle="bold"
+                    app:layout_column="3"
+                    app:layout_row="1" />
+
+                <Button
+                    android:id="@+id/btn12h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="12:00"
+                    android:textStyle="bold"
+                    app:layout_column="0"
+                    app:layout_row="2" />
+
+                <Button
+                    android:id="@+id/btn12_30h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="12:30"
+                    android:textStyle="bold"
+                    app:layout_column="1"
+                    app:layout_row="2" />
+
+                <Button
+                    android:id="@+id/btn13h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="13:00"
+                    android:textStyle="bold"
+                    app:layout_column="2"
+                    app:layout_row="2" />
+
+                <Button
+                    android:id="@+id/btn13_30h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="13:30"
+                    android:textStyle="bold"
+                    app:layout_column="3"
+                    app:layout_row="2" />
+
+                <Button
+                    android:id="@+id/btn14h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="14:00"
+                    android:textStyle="bold"
+                    app:layout_column="0"
+                    app:layout_row="3" />
+
+                <Button
+                    android:id="@+id/btn14_30h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="14:30"
+                    android:textStyle="bold"
+                    app:layout_column="1"
+                    app:layout_row="3" />
+
+                <Button
+                    android:id="@+id/btn15h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="15:00"
+                    android:textStyle="bold"
+                    app:layout_column="2"
+                    app:layout_row="3" />
+
+                <Button
+                    android:id="@+id/btn15_30h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="15:30"
+                    android:textStyle="bold"
+                    app:layout_column="3"
+                    app:layout_row="3" />
+
+                <Button
+                    android:id="@+id/btn16h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="16:00"
+                    android:textStyle="bold"
+                    app:layout_column="0"
+                    app:layout_row="4" />
+
+                <Button
+                    android:id="@+id/btn16_30h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="16:30"
+                    android:textStyle="bold"
+                    app:layout_column="1"
+                    app:layout_row="4" />
+
+                <Button
+                    android:id="@+id/btn17h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="17:00"
+                    android:textStyle="bold"
+                    app:layout_column="2"
+                    app:layout_row="4" />
+
+                <Button
+                    android:id="@+id/btn17_30h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="17:30"
+                    android:textStyle="bold"
+                    app:layout_column="3"
+                    app:layout_row="4" />
+
+            </androidx.gridlayout.widget.GridLayout>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

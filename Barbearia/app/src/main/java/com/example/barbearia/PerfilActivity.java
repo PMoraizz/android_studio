@@ -74,6 +74,12 @@ public class PerfilActivity extends AppCompatActivity {
         List<Agendamento> agendamentosList = new ArrayList<>();
         agendamentosList.add(new Agendamento("Corte + Pigmentação", "Lohan", "08:00", "22/12/2025"));
         agendamentosList.add(new Agendamento("Corte + Pigmentação", "Coisa", "08:00", "22/12/2025"));
+        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Lohan", "08:00", "22/12/2025"));
+        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Coisa", "08:00", "22/12/2025"));
+        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Lohan", "08:00", "22/12/2025"));
+        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Coisa", "08:00", "22/12/2025"));
+        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Lohan", "08:00", "22/12/2025"));
+        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Coisa", "08:00", "22/12/2025"));
 
 
         AgendamentosAdapter agendamentosAdapter = new AgendamentosAdapter(this, agendamentosList);

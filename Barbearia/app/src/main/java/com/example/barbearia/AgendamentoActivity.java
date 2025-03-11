@@ -1,21 +1,21 @@
 package com.example.barbearia;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class AgendamentoActivity extends AppCompatActivity {
     TextView txtTitulo, txtPreco, txtNomeP;
     ImageView imgP;
-    TimePicker tp;
+    private Button[] buttons;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,29 +27,29 @@ public class AgendamentoActivity extends AppCompatActivity {
         txtPreco = findViewById(R.id.txtPreco);
         txtNomeP = findViewById(R.id.txtNomeP);
         imgP = findViewById(R.id.imgP);
-        tp = findViewById(R.id.timePicker);
 
-        
-        tp.setIs24HourView(true);
-        tp.setHour(8);
-        tp.setMinute(0);
-
-        tp.setOnTimeChangedListener((view, hourOfDay, minute) -> {
-            if (minute < 30) {
-                tp.setMinute(0);
-            } else {
-                tp.setMinute(30);
-            }
-
-            if (hourOfDay < 8) {
-                tp.setHour(8);
-                tp.setMinute(0);
-            } else if (hourOfDay >= 18) {
-                tp.setHour(17);
-                tp.setMinute(30);
-            }
-        });
-
+        buttons = new Button[] {
+                findViewById(R.id.btn8h),
+                findViewById(R.id.btn8_30h),
+                findViewById(R.id.btn9h),
+                findViewById(R.id.btn9_30h),
+                findViewById(R.id.btn10h),
+                findViewById(R.id.btn10_30h),
+                findViewById(R.id.btn11h),
+                findViewById(R.id.btn11_30h),
+                findViewById(R.id.btn12h),
+                findViewById(R.id.btn12_30h),
+                findViewById(R.id.btn13h),
+                findViewById(R.id.btn13_30h),
+                findViewById(R.id.btn14h),
+                findViewById(R.id.btn14_30h),
+                findViewById(R.id.btn15h),
+                findViewById(R.id.btn15_30h),
+                findViewById(R.id.btn16h),
+                findViewById(R.id.btn16_30h),
+                findViewById(R.id.btn17h),
+                findViewById(R.id.btn17_30h)
+        };
 
         Intent intent = getIntent();
         String titulo = intent.getStringExtra("titulo");
@@ -63,6 +63,29 @@ public class AgendamentoActivity extends AppCompatActivity {
             txtNomeP.setText(profissional);
             imgP.setImageResource(img);
         }
-
+        for (Button button : buttons) {
+            button.setOnClickListener(this::onClickSelecionado);
+        }
     }
+
+    public void onClickSelecionado(View v) {
+
+        for (Button button : buttons) {
+            button.setBackgroundColor(Color.parseColor("#3F51B5"));
+        }
+
+        v.setBackgroundColor(Color.parseColor("#FF9800"));
+
+
+//        // Verifica se existe o próximo botão
+//        ViewGroup parent = (ViewGroup) v.getParent(); // Obtém o pai do botão (GridLayout)
+//        int index = parent.indexOfChild(v); // Índice do botão clicado
+
+//        if (index + 1 < parent.getChildCount()) {
+//            // Altera a cor do próximo botão
+//            View nextButton = parent.getChildAt(index + 1);
+//            nextButton.setBackgroundColor(Color.parseColor("#FF5722")); // Exemplo: Vermelho
+//        }
+    }
+
 }
