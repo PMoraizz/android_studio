@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -55,11 +54,10 @@ public class PerfilActivity extends AppCompatActivity {
                 String dataNascimento = snapshot.child("nascimento").getValue().toString();
                 String telefoneUsuario = snapshot.child("telefone").getValue().toString();
 
-                // Atualiza os campos de texto com os dados recuperados do SharedPreferences
-                nome.setText(nomeUsuario);  // Exibe o nome do usuário
-                email.setText(emailUsuario);  // Exibe o e-mail do usuário
-                dataNasc.setText(dataNascimento);  // Exibe a data de nascimento do usuário
-                telefone.setText(telefoneUsuario);  // Exibe o telefone do usuário
+                nome.setText(nomeUsuario);
+                email.setText(emailUsuario);
+                dataNasc.setText(dataNascimento);
+                telefone.setText(telefoneUsuario);
             }
 
             @Override
@@ -72,35 +70,50 @@ public class PerfilActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         List<Agendamento> agendamentosList = new ArrayList<>();
-        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Lohan", "08:00", "22/12/2025"));
-        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Coisa", "08:00", "22/12/2025"));
-        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Lohan", "08:00", "22/12/2025"));
-        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Coisa", "08:00", "22/12/2025"));
-        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Lohan", "08:00", "22/12/2025"));
-        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Coisa", "08:00", "22/12/2025"));
-        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Lohan", "08:00", "22/12/2025"));
-        agendamentosList.add(new Agendamento("Corte + Pigmentação", "Coisa", "08:00", "22/12/2025"));
 
+        DatabaseReference agendamentoRef = FirebaseDatabase.getInstance()
+                .getReference("user")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("agendamentos");
 
-        AgendamentosAdapter agendamentosAdapter = new AgendamentosAdapter(this, agendamentosList);
-        recyclerView.setAdapter(agendamentosAdapter);
+        agendamentoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                agendamentosList.clear();
+                for (DataSnapshot agendamentoSnapshot : snapshot.getChildren()) {
+                    String titulo = agendamentoSnapshot.child("titulo").getValue(String.class);
+                    String profissional = agendamentoSnapshot.child("profissional").getValue(String.class);
+                    String horario = agendamentoSnapshot.child("horario").getValue(String.class);
+                    String data = agendamentoSnapshot.child("data").getValue(String.class);
+
+                    if (titulo != null && profissional != null && horario != null && data != null) {
+                        agendamentosList.add(new Agendamento(titulo, profissional, horario, data));
+                        AgendamentosAdapter agendamentosAdapter = new AgendamentosAdapter(PerfilActivity.this, agendamentosList);
+                        recyclerView.setAdapter(agendamentosAdapter);
+                    }
+                }
+                Log.d("Agendamentos", "Lista atualizada: " + agendamentosList.size() + " agendamentos carregados.");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Agendamentos", "Erro ao carregar agendamentos: " + error.getMessage());
+            }
+        });
     }
 
     public void onClickProdutos(View v) {
         Intent intent = new Intent(PerfilActivity.this, CatalogoActivity.class);
         startActivity(intent);
-
     }
 
     public void onClickEstabelecimento(View v) {
         Intent intent = new Intent(PerfilActivity.this, BarbeariaActivity.class);
         startActivity(intent);
-
     }
 
     public void onClickProfissionais(View v) {
         Intent intent = new Intent(PerfilActivity.this, ProfissionaisActivity.class);
         startActivity(intent);
-
     }
 }

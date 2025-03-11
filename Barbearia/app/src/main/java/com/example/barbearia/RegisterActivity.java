@@ -20,7 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
-    // Declaração do botão de registrar
     Button botaoRegistrar;
     private FirebaseAuth mAuth;
     FirebaseDatabase firebaseDatabase;
@@ -31,23 +30,29 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
-        // Vincula o botão de registrar com o botão da interface
         botaoRegistrar = findViewById(R.id.botaoRegistrar);
+
+        EditText campoCpf = findViewById(R.id.campoCpf);
+        campoCpf.addTextChangedListener(MaskEditUtil.mask(campoCpf, "###.###.###-##"));
+
+        EditText campoTelefone = findViewById(R.id.campoTelefone);
+        campoTelefone.addTextChangedListener(MaskEditUtil.mask(campoTelefone, "(##) #####-####"));
+
+        EditText campoDataNascimento = findViewById(R.id.campoDataNascimento);
+        campoDataNascimento.addTextChangedListener(MaskEditUtil.mask(campoDataNascimento, "##/##/####"));
+
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         realtimeDB = firebaseDatabase.getReference();
 
-        // Chama o método para registrar o usuário
         registrarUsuario();
     }
 
     private void registrarUsuario() {
-        // Configura o ouvinte de clique para o botão de registrar
         botaoRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Obtendo as referências dos campos de entrada do usuário
                 EditText campoEmail = findViewById(R.id.campoEmail);
                 EditText campoSenha = findViewById(R.id.campoSenha);
                 EditText campoNome = findViewById(R.id.campoNome);
@@ -55,7 +60,6 @@ public class RegisterActivity extends AppCompatActivity {
                 EditText campoDataNascimento = findViewById(R.id.campoDataNascimento);
                 EditText campoTelefone = findViewById(R.id.campoTelefone);
 
-                // Obtendo os valores digitados pelo usuário nos campos de entrada
                 String emailUsuario = campoEmail.getText().toString();
                 String senha = campoSenha.getText().toString();
                 String nomeCompleto = campoNome.getText().toString();
@@ -64,7 +68,6 @@ public class RegisterActivity extends AppCompatActivity {
                 String telefone = campoTelefone.getText().toString();
 
 
-                // Verificando se todos os campos foram preenchidos
                 if (!emailUsuario.isEmpty() && !senha.isEmpty() && !nomeCompleto.isEmpty() &&
                         !cpf.isEmpty() && !dataNascimento.isEmpty() && !telefone.isEmpty()) {
 
@@ -89,14 +92,11 @@ public class RegisterActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                // Exibindo uma mensagem de sucesso
                                                 Toast.makeText(RegisterActivity.this, "Por favor, verifique seu email para finalizar o cadastro.", Toast.LENGTH_LONG).show();
 
-                                                // Redirecionando o usuário para a tela de login (MainActivity)
                                                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                                 startActivity(intent);
 
-                                                // Finaliza a activity de registro para evitar que o usuário retorne a ela após o login
                                                 finish();
                                             } else {
                                                 Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -112,7 +112,6 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Senha precisa conter pelo menos 6 caracteres", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    // Exibindo uma mensagem de erro caso algum campo não tenha sido preenchido
                     Toast.makeText(RegisterActivity.this, "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show();
                 }
             }

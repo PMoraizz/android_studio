@@ -13,7 +13,7 @@
         android:layout_marginTop="10dp"
         android:text="Corte + Pigmentacao"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +26,7 @@
         android:text="2 - WANDERSON"
         android:textAlignment="textEnd"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline15"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
         android:layout_marginTop="5dp"
         android:text="10/03/2025"
         android:textColor="#FFFFFF"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/txtTituloAgendamento"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloAgendamento" />
@@ -51,7 +51,7 @@
         android:text="08:00"
         android:textAlignment="textEnd"
         android:textColor="#FFFFFF"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/txtProfissionalAgendamento"
         app:layout_constraintTop_toBottomOf="@+id/txtProfissionalAgendamento" />

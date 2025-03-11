@@ -47,7 +47,8 @@
                 android:background="#80FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:minDate="@{System.currentTimeMillis()}"/>
 
             <TextView
                 android:id="@+id/txtNomeP"
@@ -82,6 +83,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
                 android:backgroundTint="#4CAF50"
+                android:onClick="onClickAgendamento"
                 android:text="Agendar"
                 android:textSize="24sp"
                 android:textStyle="bold"
