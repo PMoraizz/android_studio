@@ -9,19 +9,17 @@ import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Date;
 
 public class AgendamentoActivity extends AppCompatActivity {
     TextView txtTitulo, txtPreco, txtNomeP;
@@ -77,8 +75,18 @@ public class AgendamentoActivity extends AppCompatActivity {
         }
 
         calendarView.setMinDate(System.currentTimeMillis());
+
+        long selectedDate_aux = calendarView.getDate();  // get the date as a long (timestamp)
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        // Convert the long timestamp to a Date object
+        Date date = new Date(selectedDate_aux);
+        // Format the Date object into the desired string format
+        String selectedDate_aux2 = dateFormat.format(date);
+
+        verificarHorariosIndisponiveis(profissional, selectedDate_aux2);
+
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            //SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             selectedDate = dateFormat.format(new java.util.Date(year - 1900, month, dayOfMonth));
             resetarBotoes();
             verificarHorariosIndisponiveis(profissional, selectedDate);
@@ -88,7 +96,7 @@ public class AgendamentoActivity extends AppCompatActivity {
     private void resetarBotoes() {
         for (Button button : buttons) {
             button.setEnabled(true);
-            button.setBackgroundColor(Color.parseColor("#3F51B5"));
+            button.setBackgroundColor(Color.parseColor("#3F51B5")); //Blue
         }
     }
 
@@ -97,7 +105,6 @@ public class AgendamentoActivity extends AppCompatActivity {
             if(button.isEnabled()){
                 button.setBackgroundColor(Color.parseColor("#3F51B5"));
             }
-
         }
         v.setBackgroundColor(Color.parseColor("#FF9800"));
         selectedHour = ((Button) v).getText().toString();
